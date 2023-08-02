@@ -1,8 +1,30 @@
 #include <iostream>
+#include <cmath>
 
 bool isArmstrongNumber(int number)
 {
-	// TODO: implement some functionality to see if this number is an armstrong number
+	// first finding out how many digits the number has to set the power I'm going to raise them to
+	int digitCount = 0;
+	int auxiliaryNumber = number;
+	while (auxiliaryNumber > 0)
+	{
+		auxiliaryNumber /= 10;
+		digitCount++;
+	}
+
+	// Comparing the armstrongSum to the initial number
+	int armstrongSum = 0;
+	auxiliaryNumber = number;
+	while (auxiliaryNumber > 0)
+	{
+		armstrongSum += pow(auxiliaryNumber % 10, digitCount);
+		auxiliaryNumber/=10;
+	}
+	
+	if (armstrongSum == number)
+	{
+		return true;
+	}
 
 	return false;
 }
@@ -47,12 +69,6 @@ int main(int argc, char *argv[])
 		return 1;
 	}
 
-	int readNumber = 0;
-	// Get the first argument
-	std::string argumentAsString = argv[1];
-	
-	// TODO: read number / cast to integer
-
-	printIsArmstrong(readNumber);
+	printIsArmstrong(atoi(argv[1]));
 	return 0;
 }
